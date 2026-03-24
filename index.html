@@ -18,32 +18,38 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             font-family: 'Arial', sans-serif;
+            padding: 10px;
         }
 
         .container {
-            text-align: center;
+            width: 100%;
+            max-width: 500px;
         }
 
-        h1 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .game-wrapper {
-            background: white;
-            border-radius: 10px;
+        .game-device {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 30px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 3px solid #444;
+        }
+
+        .screen-area {
+            background: #000;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .info-bar {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            color: #333;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 5px #0f0;
         }
 
         .info-item {
@@ -53,129 +59,187 @@
         }
 
         .info-label {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 5px;
+            font-size: 0.8em;
+            color: #0a0;
+            margin-bottom: 3px;
         }
 
         .info-value {
             font-weight: bold;
-            color: #667eea;
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
 
         #gameCanvas {
-            border: 3px solid #333;
-            background-color: #1a1a1a;
+            border: 2px solid #0f0;
+            background-color: #000;
             display: block;
-            margin: 0 auto 20px;
+            width: 100%;
+            height: auto;
             border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
-        .controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
+        .controls-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
-        button {
-            padding: 12px 24px;
-            font-size: 1em;
+        .direction-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            justify-items: center;
+        }
+
+        .direction-pad button {
+            width: 50px;
+            height: 50px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            background: linear-gradient(145deg, #667eea, #5568d3);
+            color: white;
+            font-size: 1.5em;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .direction-buttons {
-            display: grid;
-            grid-template-columns: repeat(3, 60px);
-            gap: 10px;
-            margin-bottom: 20px;
+            transition: all 0.1s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
 
-        .direction-buttons button {
-            padding: 15px;
-            font-size: 1.2em;
-            background-color: #667eea;
-            color: white;
-            border-radius: 8px;
-            min-width: 60px;
-            min-height: 60px;
+        .direction-pad button:active {
+            background: linear-gradient(145deg, #5568d3, #667eea);
+            transform: scale(0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .direction-buttons button:active {
-            background-color: #5568d3;
-            transform: scale(0.95);
-        }
-
-        .direction-buttons button:hover {
-            background-color: #5568d3;
+        .direction-pad button:hover {
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
         }
 
         .empty-cell {
             visibility: hidden;
         }
 
+        .center-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center-controls button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
         #startBtn {
-            background-color: #667eea;
+            background: linear-gradient(145deg, #10b981, #059669);
             color: white;
         }
 
         #startBtn:hover {
-            background-color: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        #startBtn:active {
+            transform: scale(0.95);
         }
 
         #pauseBtn {
-            background-color: #f59e0b;
+            background: linear-gradient(145deg, #f59e0b, #d97706);
             color: white;
         }
 
         #pauseBtn:hover {
-            background-color: #d97706;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 6px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        #pauseBtn:active {
+            transform: scale(0.95);
         }
 
         #resetBtn {
-            background-color: #ef4444;
+            background: linear-gradient(145deg, #ef4444, #dc2626);
             color: white;
         }
 
         #resetBtn:hover {
-            background-color: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        #resetBtn:active {
+            transform: scale(0.95);
+        }
+
+        .difficulty-area {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .difficulty-label {
+            color: #fff;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .difficulty-options {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .difficulty-options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #fff;
+            font-size: 0.85em;
+            cursor: pointer;
+        }
+
+        .difficulty-options input[type="radio"] {
+            cursor: pointer;
         }
 
         .instructions {
-            background-color: #f3f4f6;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            text-align: left;
-            color: #333;
-            font-size: 0.95em;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 10px;
+            color: #ccc;
+            font-size: 0.8em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.6;
         }
 
         .instructions h3 {
-            margin-bottom: 10px;
-            color: #667eea;
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 0.95em;
         }
 
         .instructions ul {
-            margin-left: 20px;
-            line-height: 1.8;
+            margin-left: 15px;
         }
 
         .instructions li {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .game-over {
@@ -183,14 +247,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             text-align: center;
             z-index: 1000;
             display: none;
-            min-width: 300px;
+            min-width: 280px;
+            border: 2px solid #667eea;
         }
 
         .game-over.show {
@@ -212,20 +277,25 @@
         .game-over h2 {
             color: #ef4444;
             margin-bottom: 20px;
-            font-size: 2em;
+            font-size: 1.8em;
         }
 
         .game-over p {
-            font-size: 1.2em;
-            color: #333;
+            font-size: 1.1em;
+            color: #fff;
             margin-bottom: 10px;
         }
 
         .game-over button {
             margin-top: 20px;
-            background-color: #667eea;
+            background: linear-gradient(145deg, #667eea, #5568d3);
             color: white;
             padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
         }
 
         .overlay {
@@ -234,7 +304,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 999;
             display: none;
         }
@@ -243,80 +313,102 @@
             display: block;
         }
 
-        .difficulty {
-            margin-bottom: 20px;
-        }
+        @media (max-width: 480px) {
+            .game-device {
+                padding: 15px;
+            }
 
-        .difficulty label {
-            margin-right: 15px;
-            font-size: 1em;
-            color: #333;
-        }
+            .screen-area {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
 
-        .difficulty input[type="radio"] {
-            margin-right: 5px;
-            cursor: pointer;
+            .info-bar {
+                font-size: 0.8em;
+                margin-bottom: 12px;
+            }
+
+            .controls-area {
+                gap: 12px;
+                margin-bottom: 15px;
+            }
+
+            .direction-pad button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+
+            .center-controls button {
+                padding: 10px;
+                font-size: 0.85em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🐍 贪吃蛇游戏</h1>
-        
-        <div class="game-wrapper">
-            <div class="info-bar">
-                <div class="info-item">
-                    <div class="info-label">分数</div>
-                    <div class="info-value" id="score">0</div>
+        <div class="game-device">
+            <h1 style="color: white; margin-bottom: 15px; font-size: 1.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🐍 贪吃蛇</h1>
+            
+            <div class="screen-area">
+                <div class="info-bar">
+                    <div class="info-item">
+                        <div class="info-label">分数</div>
+                        <div class="info-value" id="score">0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">长度</div>
+                        <div class="info-value" id="length">1</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">难度</div>
+                        <div class="info-value" id="difficulty">简单</div>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-label">蛇长</div>
-                    <div class="info-value" id="length">1</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">难度</div>
-                    <div class="info-value" id="difficulty">简单</div>
+
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            </div>
+
+            <div class="difficulty-area">
+                <div class="difficulty-label">🎮 选择难度</div>
+                <div class="difficulty-options">
+                    <label>
+                        <input type="radio" name="difficulty" value="easy" checked> 简单
+                    </label>
+                    <label>
+                        <input type="radio" name="difficulty" value="normal"> 普通
+                    </label>
+                    <label>
+                        <input type="radio" name="difficulty" value="hard"> 困难
+                    </label>
                 </div>
             </div>
 
-            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div class="controls-area">
+                <div class="direction-pad">
+                    <div class="empty-cell"></div>
+                    <button id="upBtn">⬆️</button>
+                    <div class="empty-cell"></div>
+                    
+                    <button id="leftBtn">⬅️</button>
+                    <button id="downBtn">⬇️</button>
+                    <button id="rightBtn">➡️</button>
+                </div>
 
-            <div class="difficulty">
-                <label>
-                    <input type="radio" name="difficulty" value="easy" checked> 简单
-                </label>
-                <label>
-                    <input type="radio" name="difficulty" value="normal"> 普通
-                </label>
-                <label>
-                    <input type="radio" name="difficulty" value="hard"> 困难
-                </label>
-            </div>
-
-            <div class="direction-buttons">
-                <div class="empty-cell"></div>
-                <button id="upBtn">⬆️</button>
-                <div class="empty-cell"></div>
-                
-                <button id="leftBtn">⬅️</button>
-                <button id="downBtn">⬇️</button>
-                <button id="rightBtn">➡️</button>
-            </div>
-
-            <div class="controls">
-                <button id="startBtn">开始游戏</button>
-                <button id="pauseBtn">暂停</button>
-                <button id="resetBtn">重置</button>
+                <div class="center-controls">
+                    <button id="startBtn">▶️ 开始</button>
+                    <button id="pauseBtn">⏸️ 暂停</button>
+                    <button id="resetBtn">🔄 重置</button>
+                </div>
             </div>
 
             <div class="instructions">
                 <h3>📖 游戏说明</h3>
                 <ul>
-                    <li><strong>方向控制：</strong>点击上下左右按钮来改变蛇的方向</li>
-                    <li><strong>电脑版：</strong>也支持 ↑ ↓ ← → 箭头键或 W A S D 键</li>
-                    <li><strong>目标：</strong>吃掉红色的食物，蛇会变长</li>
-                    <li><strong>游戏结束：</strong>蛇撞到墙壁或自己的身体</li>
-                    <li><strong>难度说明：</strong>简单(1秒/格) / 普通(0.5秒/格) / 困难(0.25秒/格)</li>
+                    <li>点击方向按钮控制蛇的移动</li>
+                    <li>电脑上也可以用键盘 ↑↓←→ 或 WASD</li>
+                    <li>吃掉红色食物得分，撞墙或撞自己结束</li>
                 </ul>
             </div>
         </div>
@@ -325,8 +417,8 @@
     <div class="overlay" id="overlay"></div>
     <div class="game-over" id="gameOverModal">
         <h2>游戏结束！</h2>
-        <p>最终分数：<span id="finalScore">0</span></p>
-        <p>蛇的长度：<span id="finalLength">1</span></p>
+        <p>分数：<span id="finalScore">0</span></p>
+        <p>长度：<span id="finalLength">1</span></p>
         <button onclick="resetGame()">再玩一次</button>
     </div>
 
